@@ -1,0 +1,28 @@
+
+.table-list .col-detele {
+    width: 45px;
+}
+
+.table-list .delete {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 20px;
+    display: none;
+    line-height: 1;
+    color: rgb(250, 28, 28);
+    animation: myanimation .1s linear;
+}
+
+.table-list > tr:hover .delete {
+    display: block;
+}
+
+@keyframes myanimation {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0%);
+    }
+}
