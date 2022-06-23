@@ -12,6 +12,8 @@ let data = JSON.parse(localStorage.getItem("data")) || [];
 const filter = {};
 const sortCase = {};
 
+//render table list item
+
 function render(data) {
   const htmls = data.map((item, index) => {
     return `<tr>
@@ -37,6 +39,8 @@ function user(name, birthday, gender, time) {
   this.gender = gender;
   this.time = time;
 }
+
+//date format month year
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, "0");
@@ -64,6 +68,8 @@ function formatDate(date) {
     ].join("/")
   );
 }
+
+//render table list birthday
 
 function renderBirthday() {
   const htmls = [];
@@ -105,6 +111,8 @@ function filterHandle(name, value) {
   sortFieldCaseHandle(newData);
   render(newData);
 }
+
+//Filter by field
 
 function sortFieldCaseHandle(data, name, value) {
   sortCase[name] = +value;
@@ -170,6 +178,7 @@ function sortFieldCaseHandle(data, name, value) {
   }
   render(data);
 }
+
 function deleteHandle(item) {
   const newData = data.filter((a, index) => index !== item);
   data = [...newData];
