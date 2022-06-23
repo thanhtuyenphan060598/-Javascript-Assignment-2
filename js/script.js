@@ -8,8 +8,7 @@ const filterBirth = $(".filter-birthday");
 const filterGender = $(".filter-gender");
 const sortField = $(".sort-field");
 const sortUpDown = $(".sort-up-down");
-const btnDelete = $(".delete");
-const data = JSON.parse(localStorage.getItem("data")) || [];
+let data = JSON.parse(localStorage.getItem("data")) || [];
 const filter = {};
 const sortCase = {};
 
@@ -21,10 +20,15 @@ function render(data) {
             <td>${item.birthday}</td>
             <td>${item.gender}</td>
             <td>${item.time}</td>
-            <td class="col-detele"><button class="delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+            <td class="col-detele">
+              <button onClick="deleteHandle(${index})" class="delete">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </button>
+            </td>
             </tr>`;
   });
   tableList.innerHTML = htmls.join("");
+  renderBirthday();
 }
 
 function user(name, birthday, gender, time) {
@@ -86,6 +90,7 @@ function submit(callback, e) {
   localStorage.setItem("data", JSON.stringify(data));
   inputName.value = "";
   callback(data);
+  alert("Thêm Thành Công !!!");
 }
 
 function filterHandle(name, value) {
@@ -165,8 +170,14 @@ function sortFieldCaseHandle(data, name, value) {
   }
   render(data);
 }
-
-function deleteHandle() {}
+function deleteHandle(item) {
+  const newData = data.filter((a, index) => index !== item);
+  data = [...newData];
+  localStorage.setItem("data", JSON.stringify(data));
+  render(data);
+  renderBirthday();
+  alert("Xóa Thành Công !!!");
+}
 
 function listenFilterEvent() {
   formSubmit.addEventListener("submit", (e) => {
